@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
  import home from './home'
  import detailresto from './detailresto'
+ import review from './review'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       home,
-      detailresto
+      detailresto,
+      review
     },
 
     // enable strict mode (adds overhead!)

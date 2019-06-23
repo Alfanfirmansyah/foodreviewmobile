@@ -50,18 +50,27 @@ module.exports = function (ctx) {
         'QChip',
         'QAvatar',
         'QRating',
+        'QSeparator',
+        'QBadge',
+        'QDialog',
+        'QInput',
+        'QMenu'
        
       ],
 
       directives: [
-        'Ripple'
+        'Ripple',
+        'ClosePopup'
       ],
 
       // Quasar plugins
       plugins: [
         'Notify'
         
-      ]
+      ],
+      config:{
+        notify: { /* Notify defaults */ }
+      },
 
       // iconSet: 'ionicons-v4'
       // lang: 'de' // Quasar language

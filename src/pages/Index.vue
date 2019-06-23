@@ -8,7 +8,7 @@
       
  <q-card-actions vertical class="">
         <q-chip color="deep-orange" text-color="white" icon="local_dining">
-        {{dataresto.name}}
+        {{dataresto.name}} {{time}}
       </q-chip>
       </q-card-actions>
       <q-list>
@@ -56,23 +56,66 @@
 </style>
 
 <script>
+import { date } from 'quasar'
+import { constants } from 'crypto';
+
+
 export default {
   name: 'index',
    data () {
     return {
-      resto:[]
+      resto:[],
+      nama:null,
+      time:null,
+      makanan:null
     }
   },
 
   created: function(){
       this.pushdata()
+      this.getnotifyreview()
+      this.intervalFetchData()
+
   },
 
   methods:{
       pushdata(){
         this.$store.dispatch('home/getData')
         .then(response=> (this.resto =  response.data))  
-      }
+      },
+      getnotifyreview(){
+    let timeStamp = Date.now()
+    this.time = date.formatDate(timeStamp, 'YYYY-MM-DD HH:mm:ss')
+    console.log(this.time)
+       this.$store.dispatch('home/getNotify',(this.time))
+       .then(response=> (console.log(this.notify =  response.data,this.nama = response.data.name,this.makanan = response.data.namefood))
+       ).then(() => {
+  if (this.notify.length != 0) {
+     console.log("iye")
+     this.showNotif()
+  }
+})
+
+
+      },
+    
+
+      showNotif () {
+        
+      this.$q.notify({
+        message: this.nama +' mereview makanan ' + this.makanan,
+        color: 'purple'
+      })
+    },
+    intervalFetchData: function () {
+            setInterval(() => {    
+                this.getnotifyreview()
+                }, 1000);    
+        }
+    
+  
+      
+
 
   }
 

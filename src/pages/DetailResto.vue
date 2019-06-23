@@ -21,7 +21,7 @@
         </div>
 
         <div class="row">
-     <div class="col-5 q-mr-lg" v-for="datafood in food" :key="datafood.id">
+     <div class="col-sm-5 col-xs-10 q-mr-lg" v-for="datafood in food" :key="datafood.id">
                 <q-card class="mycardfood">
       <q-item>
         <q-item-section avatar>
@@ -48,7 +48,9 @@
         <center> <q-chip color="deep-purple" text-color="white" icon="local_dining">
         Harga : Rp.{{datafood.price}},-
       </q-chip></center>
-        <center><q-btn class="glossy" rounded color="deep-orange" label="View Reviews" /></center>
+        <center><q-btn :to="{name:'detail-food', params:{foodid:datafood.id}}" class="glossy" rounded color="deep-orange" label="View Reviews"   >
+          </q-btn>
+        </center>
       </q-card-section>
     </q-card>
             
@@ -60,18 +62,15 @@
             </div>
     </q-page>
 </template>
+
 <script>
 export default {
     name: 'detail-resto',
     data () {
     return {
       resto:{},
-      food:{},
-      id:null,
-      
-      
-
-
+      food:[],
+      id:null
     }
   },
 
@@ -79,7 +78,7 @@ export default {
       this.id = this.$route.params.id
       this.getrestodetail() 
       this.getfood()
-      this.$store.commit('detailresto/resetDetailResto')
+    
   },
 
   methods:{
@@ -90,14 +89,10 @@ export default {
       },
       getfood(){
         this.$store.dispatch('detailresto/getFood',(this.id))
-        .then(response=> {
-          response.data.forEach(data=>{
-            this.$store.commit('detailresto/setDetailResto',data)
-            this.food = this.$store.getters['detailresto/getDetailResto']
-          })        
-        })
+        .then(response=> (this.food =  response.data))  
 
       },
+      
 
      
       

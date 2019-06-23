@@ -4,9 +4,14 @@ const routes = [
     path: '/',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '',   name: 'index',component: () => import('pages/Index.vue'),
-      children:[ { path: ':id',   name: 'detail-resto',component: () => import('pages/DetailResto.vue') }]
-    },
+      { 
+      path: '',   name: 'index',component: () => import('pages/Index.vue'),
+      children:[ { path: ':id',   name: 'detail-resto',component: () => import('pages/DetailResto.vue'),}]
+      },
+      {
+      path: 'food/:foodid',   name: 'detail-food',component: () => import('pages/DetailFood.vue')
+
+      }
      
     ]
   }

@@ -18,7 +18,16 @@
           v-go-back=" '/' "
           aria-label="Menu"
         >
-          <q-icon name="arrow_back_ios" class="absolute" />
+          <q-icon name="keyboard_arrow_left" />
+        </q-btn>
+        <q-btn v-if="this.$route.name == 'detail-food'"
+          flat
+          dense
+          round
+          v-go-back=" '/' "
+          aria-label="Menu"
+        >
+          <q-icon name="keyboard_arrow_left" />
         </q-btn>
 
         <q-toolbar-title class="absolute-center"  v-if="this.$route.name == 'index'">
@@ -26,6 +35,9 @@
         </q-toolbar-title>
         <q-toolbar-title class="absolute-center"  v-if="this.$route.name == 'detail-resto'">
           Detail Resto
+        </q-toolbar-title>
+        <q-toolbar-title class="absolute-center"  v-if="this.$route.name == 'detail-food'">
+          Detail Food
         </q-toolbar-title>
 
         
